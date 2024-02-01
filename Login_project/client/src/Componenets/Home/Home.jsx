@@ -5,25 +5,33 @@ import axios from 'axios';
 import {Link} from 'react-router-dom'
 
 function Home() {
+    const obj = {
+        name : String,
+        email : String,
+        password : String, 
+        role : String,
+        description : String,
+        address : String
+    }
     const[page, setPage] = useState(1);
     const[users_num, setUsers_num] = useState(4);
-    const[userData, setUserData] = useState("");
+    const[userData, setUserData] = useState(obj);
     const[list_len, setList_len] = useState(Number);
     
     const dropUser =useCallback( async(data) => {
-        axios.delete(`http://localhost:8080/dropUser/${data}`)
+        axios.delete(`http://localhost:8080/dropUser/${data}`);
+        
     }, [])
     useEffect(()=> {
         async function users_func(){
             const Data = await users();
-            setList_len(Data.length);
-            setUserData(Data.data);
+            Data&&setList_len(Data.length);
+            Data&&setUserData(Data.data);
             console.log("..")
         }
         users_func();
     }, [page, users_num, list_len])
 
-    // useCallback(dropUser, []);
     
     const users = async() => axios.get("http://localhost:8080/users", {params : {
         page_num : page,
@@ -46,7 +54,7 @@ function Home() {
         <div className='home-container'>
             <div>
                 <h1>Home page</h1>
-                <ul className='home-list'>
+                {/* <ul className='home-list'>
                     {userData && userData.map((user)=>{
                         return(
                             <li className='list-items'>
@@ -59,7 +67,28 @@ function Home() {
                             </li>
                         )
                     })}
-                </ul>
+                </ul> */}
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Description</th>
+                        <th>Address</th>
+                    </tr>
+                    {userData && userData.map((user)=> {
+                        return(
+                            <tr>
+                                <td>{user.name}</td>
+                                <td>{user.email}</td>
+                                <td>{user.role}</td>
+                                <td>{user.description}</td>
+                                <td>{user.address}</td>
+                            </tr>
+                            
+                        )
+                    })}
+                </table>
             </div>
             <div>
                 <input type="number" defaultValue={users_num} onChange={(e)=> setUsers_num(e.target.value)}></input>

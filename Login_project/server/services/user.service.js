@@ -32,8 +32,8 @@ const drop = function(id) {
     return model.User.deleteOne({_id : id});
 }
 
-const create_user = function(name, email, hash) {
-    return model.User.create({name, email, password : hash});
+const create_user = function(name, email, hash, role, description, address) {
+    return model.User.create({name, email, password : hash, role, description, address});
 } 
 
 const login = function(email){
