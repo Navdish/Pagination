@@ -13,7 +13,7 @@ function Login(){
     async function handleSubmit(e) {
         e.preventDefault();
         const response_token = await login({email, password});
-        //console.log(response_token.data);
+        console.log(response_token.data);
         Cookies.set('token', response_token.data, { expires: 7, secure: true });
         // console.log(Cookies.get('token'));
         const response = await comm();
