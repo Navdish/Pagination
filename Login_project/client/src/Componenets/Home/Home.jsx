@@ -70,6 +70,7 @@ function Home() {
                 </ul> */}
                 <table>
                     <tr>
+                        
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
