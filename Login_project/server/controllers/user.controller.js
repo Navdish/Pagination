@@ -57,7 +57,8 @@ const drop_user = async function(req, res){
 
 
 const signup =async function(req, res){
-    const {name, email, password, role, description, address} = req.body;
+    console.log(req.body);
+    const {name, email, password, role, description, address} = req.body.user;
     const user = await service.userService.find_user(email);
 
     if(user)
@@ -66,9 +67,9 @@ const signup =async function(req, res){
     }
     else 
     {
-        const hash = await bcrypt.hash(password, saltRounds);
+        // const hash = await bcrypt.hash(password, saltRounds);
         // const new_user = await Users.create({name, email, password : hash});
-        const new_user = await service.userService.create_user(name, email, hash, role, description, address);
+        const new_user = await service.userService.create_user(name, email, password, role, description, address);
         res.status(200).json({message : "ok"});
     }
 
