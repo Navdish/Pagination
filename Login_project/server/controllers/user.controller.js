@@ -4,17 +4,17 @@ const saltRounds = 10;
 const jwt = require('jsonwebtoken')
 
 const fetch_users = async function(req, res){
-    const page = req.query.page_num;
-    const count_users = req.query.users_num;
+    // console.log(req.query);
+    const {page_num, users_num, filter_value, sort_value, search} = req.query;
     // const users_data = await Users.find().sort({name : 1}).slice((page-1)*count_users, count_users);
     // const users_data = await Users.find().sort({name : 1}).skip((page-1)*count_users).limit(count_users);
-    const users_data = await service.userService.fetch_users_data(page, count_users);
+    const users_data = await service.userService.fetch_users_data(page_num, users_num, filter_value, sort_value, search);
     if(users_data)
     {
         return res.status(200).json(users_data);
     }
     else {
-        return res.status(403).json({"message" : "cannot find data" });
+        return res.status(200).json({"message" : "cannot find data" });
     }
 }
 
@@ -37,13 +37,13 @@ const fetch_user = async function (req, res){
 
 const user_update =  async function(req, res){
     // const user = await Users.findOneAndUpdate({_id : req.body._id}, {name: req.body.name, email : req.body.email});
-    const user = await service.userService.update_user(req.body._id, req.body.name, req.body.email);
-    if(user)
-    {
+    const {_id, name, email, role, description, address} = req.body;
+    const user = await service.userService.update_user(_id, name, email, role, description, address);
+    if(user){
         return res.status(200).json({"message" : "successfully updated"})
     }
     else {
-        return res.status(400).json({"message" : "update query not processed"})
+        return res.json({"message" : "update query not processed"})
     }
 }
 

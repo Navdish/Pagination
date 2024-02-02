@@ -15,16 +15,40 @@ const model = require('../models');
 // }
 
 
-const fetch_users_data = function(page, count_users){
-    return model.User.find().sort({name : 1}).skip((page-1)*count_users).limit(count_users);
+const fetch_users_data = function(page, count_users, filter_value, sort_value, search){
+    // console.log("search ", search);
+    if(search === "")
+    {
+        if(filter_value === "All"){
+            // console.log(sort_value);
+            return model.User.find().sort(sort_value).skip((page-1)*count_users).limit(count_users);
+        }
+        else {
+            return model.User.find({role : filter_value}).sort(sort_value).skip((page-1)*count_users).limit(count_users);
+        }
+    }
+    else {
+        if(filter_value === "All"){
+            return model.User.find({
+                "$or":
+                [
+                    {"name" : {$regex:search,  $options: 'i'}}
+                ]
+            }).sort(sort_value).skip((page-1)*count_users).limit(count_users);
+        }
+        else {
+            return model.User.find({name: search, role : filter_value}).sort(sort_value).skip((page-1)*count_users).limit(count_users);
+        }
+    }
+    
 }
 
 const fetch_user_by_id = function(id){
     return model.User.findById(id);
 }
 
-const update_user = function(id, name, email){
-    return model.User.findOneAndUpdate({_id : id}, {name: name, email : email});
+const update_user = function(id, name, email, role, description, address){
+    return model.User.findOneAndUpdate({_id : id}, {name: name, email : email, role:role, description: description, address: address});
 }
 
 const drop = function(id) {

@@ -1,24 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 body {
     margin: 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: white;
+    height: 100vh;
+}
+
+.main-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #F3F4F6;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+#root {
+    width: 100%;
 }
 
 .home-container {
-    width: 50vw;
+    width: 90vw;
     display: flex;
     flex-direction: column;
     align-items: center;
 
     background-color: white;
     min-height: 600px;
-    /* justify-content: space-around; */
-    border-width: 20px;
-    border-style: solid;
-    border-color: black;
     border-radius: 20px;
+    /* justify-content: space-around; */
+    /* border-width: 20px;
+    border-style: solid;
+    border-color: black; */
+    /* border-radius: 20px; */
+}
+
+.topbar {
+    display: flex;
+    margin: 30px;
+    justify-content: space-between;
+}
+
+
+
+.heading {
+    margin: 0px;
+    font-family: 'Poppins', sans-serif;
+    font-size: large;
+}
+
+.home-div {
+    width: 100%;
+}
+
+.home-table {
+    width:100%;
+    border-collapse: collapse;
+    border-bottom: 1px solid #ECEDF1;
+}
+
+.lowerbar {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 10px;
+    padding: 10px;
+}
+
+.lower-left {
+    display: flex;
+}
+
+.lower-left>p {
+    margin: 0px;
+}
+
+.lower-left>input {
+    width: 25px;
+}
+
+th {
+    padding: 30px;
+    border-top: 1px solid #ECEDF1;
+    border-bottom: 1px solid #ECEDF1;
+    border-left: none;
+    border-right: none;
+    
+}
+
+input, select {
+    border: none;
+    background-color:#F9FAFC;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.top-right>label {
+    padding-top: 10px;
+}
+
+label, p {
+    padding: 5px;
+}
+
+td {
+    padding: 10px;
+    text-align: center;
+}
+
+.top-right {
+    display: flex;
+    gap:20px;
+}
+
+.page-num {
+    margin: 0px;
+    background-color: #3B82F6;
+    color: white;
+    border-radius: 5px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+td>input {
+    width: 100%;
+}
+
+.table-header{
+    background-color : #F9FAFC;
+    padding: 50px;
+    border-color: black;
+    border-width: 1px;
 }
 
 .home-list {
@@ -34,6 +152,7 @@ body {
 .pagination-btn {
     display: flex;
     justify-content: center;
+    gap:10px;
 }
 
 
@@ -45,4 +164,12 @@ body {
 
 .list-btn {
     display: flex;
+}
+
+.edit-row {
+
+}
+
+.none {
+    display: none;
 }
